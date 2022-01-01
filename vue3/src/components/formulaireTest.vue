@@ -1,7 +1,8 @@
 <template>
     <article class="formulaire">
-        <button v-on:click='changeToggle'>actvation</button>
-        <div ref='element' class="formulaire">
+        <button v-on:click='changeToggle' v-if="toogle==false">activation</button>
+        <button v-on:click='changeToggle' v-if="toogle==true">desactivation</button>
+        <div  class="formulaire" v-if="toogle==true">
         <p v-if="nom.length>3">{{nom}}</p>
         <input type="text" v-model="nom">
         <button v-on:click="submitt" type="submit">valide ma gueule </button>
@@ -9,29 +10,20 @@
     </article>
 </template>
 
-<script>
+<script setup>
 import { ref,onMounted } from 'vue';
 
-export default {
-    setup(){
 let nom=ref('')
-let element=ref()
 let nameValue
+let toogle=ref(false)
 function submitt(){
-     nameValue=`${nom.value}`
-    console.log(nameValue)
-    /*console.log('nom:'+nom.value)*/
+nameValue=`${nom.value}`
+console.log(nameValue)
 }
-
-return{
-    nom,
-    element,
-    nameValue,
-    submitt,
+function changeToggle(){
+toogle.value=!toogle.value
+console.log(toogle)
 }
-    },
-}
-
 </script>
 
 
