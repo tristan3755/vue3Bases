@@ -1,24 +1,37 @@
 <template>
-<div ref='element' class="formulaire">
-    <p v-if="nom.length>3">{{nom}}</p>
-    <input type="text" v-model="nom">
-    <button v-on:click="submitt" type="submit">valide ma gueule </button>
-</div>
+    <article class="formulaire">
+        <button v-on:click='changeToggle'>actvation</button>
+        <div ref='element' class="formulaire">
+        <p v-if="nom.length>3">{{nom}}</p>
+        <input type="text" v-model="nom">
+        <button v-on:click="submitt" type="submit">valide ma gueule </button>
+        </div>
+    </article>
 </template>
 
-
-<script setup>
+<script>
 import { ref,onMounted } from 'vue';
 
-let nom =ref('')
+export default {
+    setup(){
+let nom=ref('')
 let element=ref()
+let nameValue
 function submitt(){
-    console.log(`nom=${nom.value}`)
+     nameValue=`${nom.value}`
+    console.log(nameValue)
     /*console.log('nom:'+nom.value)*/
 }
-onMounted(()=>{
-element.value.classList='active'
-})
+
+return{
+    nom,
+    element,
+    nameValue,
+    submitt,
+}
+    },
+}
+
 </script>
 
 
@@ -31,7 +44,5 @@ element.value.classList='active'
     align-items: center;
     justify-content: space-evenly;
 }
-.active{
-    background-color: aquamarine;
-}
+
 </style>
